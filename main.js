@@ -1,6 +1,9 @@
 var zenek = []
 var zenecime
 var zenehossza
+var intRegex = /^\d+$/;
+var floatRegex = /^((\d+(\.\d *)?)|((\d*\.)?\d+))$/;
+
 class Szam {
     constructor(zenecim, zenehossz) {
       this.zenecim = zenecim
@@ -10,14 +13,22 @@ class Szam {
 
 $( document ).ready(function() {
     $("#submit").click(function(){
-        console.log("clicked")
-        zenecime = $("#zenecime").val()
-        zenehossza = $("#zenehossza").val()
-        try {var ujZene = new Szam(zenecime, zenehossza);
+        zenecime = $("#zenecim").val()
+        zenehossza = $("#zenehossz").val()
+        if($.isNumeric(zenecime) == true){
+            alert("Hibás adat, adjon meg egy címet")
+        }
+        else if($.isNumeric(zenehossza) == false){
+            alert("Hibás adat, másodpercet adjon meg")
+        }
+        else{
+            try {
+            var ujZene = new Szam(zenecime, zenehossza);
             zenek.push(ujZene);
             console.log("Uj szam added");}
         catch (e) {
             console.log(e)
+        }
         }
     });
 });
